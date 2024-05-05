@@ -1,13 +1,18 @@
 import { ComponentPropsWithRef, FC, MouseEvent } from "react";
-import { usePopoverContext } from "./PopoverProdiver";
+import { usePopoverContext } from "./PopoverProvider";
 import { classNames } from "../../helpers";
 
 interface PopoverButtonProps extends ComponentPropsWithRef<"button"> {}
 
 const PopoverButton: FC<PopoverButtonProps> = ({ children, className, ...rest }) => {
-  const { onOpen } = usePopoverContext();
+  const { isUpdating, onOpen, toggleUpdate } = usePopoverContext();
 
   const handleClick = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    if (isUpdating) {
+      // prevent opening when popover is already opened
+      toggleUpdate();
+      return;
+    }
     rest.onClick?.(e);
     onOpen();
   };

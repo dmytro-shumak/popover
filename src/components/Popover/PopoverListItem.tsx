@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, FC, MouseEvent } from "react";
-import { usePopoverContext } from "./PopoverProdiver";
+import { usePopoverContext } from "./PopoverProvider";
 import { classNames } from "../../helpers";
 
 interface PopoverListItemProps extends ComponentPropsWithoutRef<"button"> {}

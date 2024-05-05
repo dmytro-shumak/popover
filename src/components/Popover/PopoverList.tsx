@@ -1,14 +1,17 @@
 import { ComponentPropsWithoutRef, FC, useRef } from "react";
 import { classNames } from "../../helpers";
 import useClickOutside from "../../hooks/useClickOutside";
-import { usePopoverContext } from "./PopoverProdiver";
+import { usePopoverContext } from "./PopoverProvider";
 
 interface PopoverListProps extends ComponentPropsWithoutRef<"div"> {}
 
 const PopoverList: FC<PopoverListProps> = ({ children, className }) => {
-  const { isOpen, onClose } = usePopoverContext();
+  const { isOpen, onClose, toggleUpdate } = usePopoverContext();
   const ref = useRef<HTMLDivElement>(null);
-  useClickOutside(ref, () => onClose());
+  useClickOutside(ref, () => {
+    toggleUpdate();
+    onClose();
+  });
   if (!isOpen) return null;
 
   return (

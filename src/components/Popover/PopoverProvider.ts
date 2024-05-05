@@ -2,11 +2,13 @@ import { createContext, useContext } from "react";
 
 interface PopoverContextProps {
   isOpen: boolean;
+  isUpdating: boolean;
+  toggleUpdate: () => void;
   onOpen: () => void;
   onClose: () => void;
 }
 
-export const PopoverContext = createContext<PopoverContextProps>(null!);
+export const PopoverContext = createContext<PopoverContextProps | null>(null);
 
 export const usePopoverContext = () => {
   const context = useContext(PopoverContext);
